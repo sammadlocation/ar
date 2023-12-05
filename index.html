@@ -32,9 +32,11 @@
           gesture-handler
         >
           <a-entity
-            text="value: Click ici; color: #ffffff; align: center; width: 2;"
-            position="0 0 0.01"
-          ></a-entity>
+          ui-button="value: Click Me; scale: 0.2 0.2 0.2;"
+          position="0 0.5 -1"
+          class="clickable"
+          gesture-handler
+        ></a-entity>
         </a-entity>
       </a-marker>
       <a-entity camera></a-entity>
