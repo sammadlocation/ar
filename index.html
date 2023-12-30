@@ -5,6 +5,17 @@
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.2.2/aframe/build/aframe-ar.js"></script>
     <script src="./gestion_event/gesture-detector.js"></script>
     <script src="./gestion_event/gesture-handler.js"></script>
+<!--  handling the text  -->
+   <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Attacher l'événement "targetFound" à la scène
+    var sceneEl = document.querySelector("#scene");
+    sceneEl.addEventListener("targetFound", function (event) {
+      alert("kotobia smile");
+    });
+  });
+</script>
+
   </head>
   <body>
     <a-scene 
