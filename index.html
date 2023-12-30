@@ -5,31 +5,35 @@
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.2.2/aframe/build/aframe-ar.js"></script>
     <script src="./gestion_event/gesture-detector.js"></script>
     <script src="./gestion_event/gesture-handler.js"></script>
-<!--  handling the text  -->
-   <script>
- 
-    const sceneEl = document.querySelector('a-scene');
-    sceneEl.addEventListener("targetFound", function (event) {
-      alert("kotobia smile");
-    });
-</script>
 
+    <script>
+      AFRAME.registerComponent("markerhandler", {
+        init: function () {
+          this.el.addEventListener("markerFound", function (event) {
+            alert("kotobia smile");
+          });
+        },
+      });
+    </script>
   </head>
   <body>
-    <a-scene 
-        embedded arjs="sourceType: webcam; trackingMethod: best;"
-        renderer="logarithmicDepthBuffer: true;"
-        vr-mode-ui="enabled: false"
-        gesture-detector
-        id="scene"
+    <a-scene
+      embedded
+      arjs="sourceType: webcam; trackingMethod: best;"
+      renderer="logarithmicDepthBuffer: true;"
+      vr-mode-ui="enabled: false"
+      gesture-detector
+      id="scene"
     >
-      <a-marker type="pattern" url="./assets/test.patt"
-      raycaster="objects: .clickable"
-      emitevents="true"
-      cursor="fuse: false; rayOrigin: mouse;"
-      id="markerA"
+      <a-marker
+        type="pattern"
+        url="./assets/test.patt"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        cursor="fuse: false; rayOrigin: mouse;"
+        id="markerA"
+        markerhandler
       >
-  
         <a-entity
           gltf-model="./assets/marrakech/scene.gltf"
           scale="0.5 0.5 0.5"
@@ -50,7 +54,5 @@
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
-    
   </body>
-  
 </html>
