@@ -1,22 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.2.2/aframe/build/aframe-ar.js"></script>
     <script src="./gestion_event/gesture-detector.js"></script>
     <script src="./gestion_event/gesture-handler.js"></script>
 
+    <style>
+      #infoDiv {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+    </style>
+
     <script>
       AFRAME.registerComponent("markerhandler", {
         init: function () {
           this.el.addEventListener("markerFound", function (event) {
-            alert("kotobia smile");
+            showInfo();
           });
         },
       });
+
+      function showInfo() {
+        var infoDiv = document.getElementById("infoDiv");
+        var sceneEl = document.querySelector("#scene");
+
+        // Afficher les informations
+        infoDiv.innerHTML = "<p>Informations à lire...</p>";
+
+        // Afficher le bouton pour cacher les informations
+        infoDiv.innerHTML += '<button onclick="hideInfo()">Cacher les informations</button>';
+
+        // Afficher les informations
+        infoDiv.style.display = "block";
+
+        // Masquer la scène
+        sceneEl.setAttribute("visible", false);
+      }
+
+      function hideInfo() {
+        var infoDiv = document.getElementById("infoDiv");
+        var sceneEl = document.querySelector("#scene");
+
+        // Masquer les informations
+        infoDiv.style.display = "none";
+
+        // Afficher à nouveau la scène
+        sceneEl.setAttribute("visible", true);
+      }
     </script>
   </head>
   <body>
+    <div id="infoDiv"></div>
     <a-scene
       embedded
       arjs="sourceType: webcam; trackingMethod: best;"
@@ -46,10 +92,11 @@
 
         <!-- Add a button using ui-button component -->
         <a-entity
-          ui-button="value: Click Me; scale: 0.2 0.2 0.2;"
+          ui-button="value: Afficher les informations; scale: 0.2 0.2 0.2;"
           position="0 0.5 -1"
           class="clickable"
           gesture-handler
+          onclick="showInfo()"
         ></a-entity>
       </a-marker>
       <a-entity camera></a-entity>
